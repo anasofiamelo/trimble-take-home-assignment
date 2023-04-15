@@ -1,10 +1,17 @@
 import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+
 import { CreateTruckDto } from './dto/create-truck.dto';
 
+import { Truck } from './entities/truck.entity';
+
+import { Trucks } from './schemas/truck.schema';
 @Injectable()
 export class TrucksService {
+  constructor(@InjectModel(Trucks.name) private truckModel: Model<Truck>) {}
+
   create(createTruckDto: CreateTruckDto) {
-    console.log('createTruckDto :>> ', createTruckDto);
     return 'This action adds a new truck';
   }
 
