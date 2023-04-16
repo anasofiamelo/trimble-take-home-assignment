@@ -11,12 +11,13 @@ import { Trucks } from './schemas/truck.schema';
 export class TrucksService {
   constructor(@InjectModel(Trucks.name) private truckModel: Model<Truck>) {}
 
-  create(createTruckDto: CreateTruckDto) {
-    return 'This action adds a new truck';
+  async create(createTruckDto: CreateTruckDto) {
+    await this.truckModel.create(createTruckDto);
   }
 
-  findAll() {
-    return `This action returns all trucks`;
+  async findAll(): Promise<Truck[]> {
+    const trucks = await this.truckModel.find();
+    return trucks;
   }
 
   findOne(id: number) {
