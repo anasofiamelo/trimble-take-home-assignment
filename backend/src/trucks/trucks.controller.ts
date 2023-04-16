@@ -16,9 +16,9 @@ export class TrucksController {
     return this.trucksService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.trucksService.findOne(+id);
+  @Get(':chassi')
+  findOne(@Param('chassi') chassi: string) {
+    return this.trucksService.findOne(chassi);
   }
 
   @Delete(':id')

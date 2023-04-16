@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { NotFoundException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
@@ -20,8 +20,14 @@ export class TrucksService {
     return trucks;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} truck`;
+  async findOne(chassi: string) {
+    const truck = await this.truckModel.findOne({ chassi });
+
+    if (!truck) {
+      throw new NotFoundException('Truck not found');
+    }
+
+    return truck;
   }
 
   remove(id: number) {
