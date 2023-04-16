@@ -3,10 +3,10 @@ import { HydratedDocument } from 'mongoose';
 
 export type TruckDocument = HydratedDocument<Trucks>;
 
-@Schema()
+@Schema({ timestamps: true })
 export class Trucks {
   @Prop({ unique: true })
-  chassis: string;
+  chassi: string;
 
   @Prop({})
   model: string;
