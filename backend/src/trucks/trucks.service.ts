@@ -1,4 +1,8 @@
-import { NotFoundException, Injectable } from '@nestjs/common';
+import {
+  NotFoundException,
+  ConflictException,
+  Injectable,
+} from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
@@ -12,6 +16,13 @@ export class TrucksService {
   constructor(@InjectModel(Trucks.name) private truckModel: Model<Truck>) {}
 
   async create(createTruckDto: CreateTruckDto) {
+    const { chassi } = createTruckDto;
+    const exists = await this.truckModel.findOne({ chassi });
+
+    if (exists) {
+      throw new ConflictException('Truck already exists');
+    }
+
     await this.truckModel.create(createTruckDto);
   }
 
