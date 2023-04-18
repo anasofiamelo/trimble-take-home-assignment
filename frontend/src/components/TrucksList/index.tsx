@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Alert, Button, Stack } from '@mui/material'
 import { useLoaderData, Link } from 'react-router-dom'
 import { AxiosError } from 'axios'
@@ -19,11 +19,16 @@ type LoaderData = {
 
 function TrucksList() {
   const data = useLoaderData() as LoaderData
+  const [trucks, setTrucks] = useState<Truck[]>()
   const { alert, setAlert, handleCloseAlert } = useAlert()
 
   useEffect(() => {
     if (data.status === status.internal_server_error) {
       setAlert({ type: 'error', message: 'Server error when fetching information' })
+    }
+
+    if (data.trucks) {
+      setTrucks(data.trucks)
     }
   }, [data])
 
@@ -31,6 +36,7 @@ function TrucksList() {
     try {
       await TruckService.delete(_id)
       setAlert({ type: 'success', message: `${model} deleted` })
+      setTrucks((prev) => prev?.filter((truck) => truck._id !== _id))
     } catch (err: unknown) {
       const error = err as AxiosError
       if (!error.response) {
@@ -58,8 +64,9 @@ function TrucksList() {
           {alert.message}
         </Alert>
       )}
+
       <Stack spacing={1}>
-        {data.trucks?.map((truck: any) => (
+        {trucks?.map((truck: Truck) => (
           <TruckCard onDelete={handleDeleteTruck} key={truck._id} {...truck} />
         ))}
       </Stack>
