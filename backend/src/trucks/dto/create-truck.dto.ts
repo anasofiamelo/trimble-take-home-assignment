@@ -3,7 +3,7 @@ export class CreateTruckDto {
   @IsNotEmpty()
   @IsString()
   @Length(17)
-  chassi: string;
+  chassis: string;
 
   @IsNotEmpty()
   @IsString()
