@@ -6,6 +6,7 @@ import TruckService from '../../../services/TruckService'
 import useAlert from '../../..//hooks/useAlert'
 
 import { Truck } from '../../../interfaces/Truck'
+import GoBack from '../../GoBack'
 
 type LoaderData = {
   truck?: Truck
@@ -41,6 +42,7 @@ function AddLastLocation() {
 
   return (
     <div>
+      <GoBack />
       <h2>Add last location to {data.truck?.model} vehicle</h2>
       <form
         style={{

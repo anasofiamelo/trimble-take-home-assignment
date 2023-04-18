@@ -5,6 +5,7 @@ import { AxiosError } from 'axios'
 import TruckService from '../../services/TruckService'
 import useAlert from '../../hooks/useAlert'
 import { status } from '../../constants/httpStatusCode'
+import GoBack from '../GoBack'
 
 function TruckForm() {
   const [chassis, setChassis] = useState<string>('')
@@ -41,6 +42,7 @@ function TruckForm() {
 
   return (
     <div>
+      <GoBack />
       <h2>Add a truck</h2>
       <form
         style={{

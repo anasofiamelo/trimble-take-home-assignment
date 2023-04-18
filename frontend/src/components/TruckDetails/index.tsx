@@ -13,6 +13,7 @@ import useAlert from '../../hooks/useAlert'
 import { Truck } from '../../interfaces/Truck'
 
 import Map from './Map'
+import GoBack from '../GoBack'
 
 type LoaderData = {
   truck?: Truck
@@ -37,6 +38,7 @@ function TruckDetails() {
 
   return (
     <div>
+      <GoBack />
       <Stack direction="row" justifyContent="space-between" alignItems="center">
         <h2>Truck</h2>
 
