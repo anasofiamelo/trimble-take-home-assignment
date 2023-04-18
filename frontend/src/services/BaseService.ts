@@ -17,7 +17,7 @@ const resolve = (args: string[]) => {
 export const BASE_URL = 'http://localhost:8080'
 
 class BaseService {
-  static base_endpoint = '/trucks'
+  static base_endpoint = '/'
   static base_url = BASE_URL
   static headers: Partial<AxiosHeaders> = {}
 
