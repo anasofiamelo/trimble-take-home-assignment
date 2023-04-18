@@ -7,21 +7,22 @@ import useAlert from '../../hooks/useAlert'
 import { status } from '../../constants/httpStatusCode'
 
 function TruckForm() {
-  const [chassi, setChassi] = useState<string>('')
+  const [chassis, setChassis] = useState<string>('')
   const [model, setModel] = useState<string>('')
   const [year, setYear] = useState<string>('')
 
-  const missingData = !chassi || !model || !year
+  const missingData = !chassis || !model || !year
 
   const { alert, setAlert, handleCloseAlert } = useAlert()
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    let data = { chassis, model, year: +year }
     try {
       setAlert(null)
 
       e.preventDefault()
 
-      await TruckService.create({ chassi, model, year: +year })
+      await TruckService.create(data)
 
       setAlert({ type: 'success', message: 'Truck created' })
     } catch (err: unknown) {
@@ -56,8 +57,8 @@ function TruckForm() {
         )}
         <div style={{ display: 'grid', gap: 10 }}>
           <TextField
-            onChange={(e) => setChassi(e.target.value)}
-            label="Chassi"
+            onChange={(e) => setChassis(e.target.value)}
+            label="Chassis"
             size="small"
             variant="outlined"
             required={true}

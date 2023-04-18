@@ -25,7 +25,7 @@ function AddLastLocation() {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     let formData = {
-      chassis: data!.truck!.chassi,
+      chassis: data!.truck!.chassis,
       latitude: +latitude,
       longitude: +longitude
     }
@@ -58,7 +58,7 @@ function AddLastLocation() {
 
         <div style={{ display: 'grid', gap: 10 }}>
           <TextField
-            value={data?.truck?.chassi}
+            value={data?.truck?.chassis}
             label="Chassi"
             size="small"
             variant="outlined"

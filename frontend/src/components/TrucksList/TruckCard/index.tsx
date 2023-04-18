@@ -14,7 +14,7 @@ import TruckService from '../../../services/TruckService'
 import useAlert from '../../../hooks/useAlert'
 
 function TruckCard(props: any) {
-  const { _id, model, chassi, year } = props
+  const { _id, model, chassis, year } = props
 
   const { alert, setAlert, handleCloseAlert } = useAlert()
 
@@ -43,9 +43,9 @@ function TruckCard(props: any) {
 
         <Stack direction="row" alignItems="center" spacing={0.5}>
           <Typography sx={{ fontSize: 14 }} color="text.secondary">
-            Chassi:
+            Chassis:
           </Typography>
-          <Typography>{chassi}</Typography>
+          <Typography>{chassis}</Typography>
         </Stack>
 
         <Stack direction="row" alignItems="center" spacing={0.5}>

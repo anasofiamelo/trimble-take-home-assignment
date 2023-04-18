@@ -52,7 +52,7 @@ function TruckDetails() {
 
       {data.truck && (
         <div>
-          <p>Chassi: {data.truck.chassi}</p>
+          <p>Chassis: {data.truck.chassis}</p>
           <p>Model: {data.truck.model}</p>
           <p>Year: {data.truck.year}</p>
         </div>
