@@ -6,9 +6,9 @@ export interface Location {
 }
 
 export interface Truck {
-  chassi: string
+  chassis: string
   model: string
   year: number
-  lastLocation: Location
-  locations: Location[]
+  lastLocation?: Location
+  locations?: Location[]
 }
