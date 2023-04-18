@@ -42,7 +42,7 @@ export class TrucksService {
     return truck;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} truck`;
+  async remove(id: string) {
+    await this.truckModel.findByIdAndDelete(id);
   }
 }

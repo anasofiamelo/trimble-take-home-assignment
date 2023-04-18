@@ -29,6 +29,6 @@ export class TrucksController {
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.trucksService.remove(+id);
+    return this.trucksService.remove(id);
   }
 }
