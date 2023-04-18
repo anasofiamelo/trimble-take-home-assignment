@@ -6,7 +6,7 @@ import { Location } from 'src/locations/schemas/location.schema';
 @Schema({ timestamps: true })
 export class Truck extends Document {
   @Prop({ unique: true })
-  chassi: string;
+  chassis: string;
 
   @Prop({ required: true })
   model: string;
