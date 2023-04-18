@@ -1,10 +1,14 @@
 import { Controller, Get, Post, Body, Param, Delete } from '@nestjs/common';
 import { TrucksService } from './trucks.service';
+import { LocationsService } from 'src/locations/locations.service';
 import { CreateTruckDto } from './dto/create-truck.dto';
 
 @Controller('trucks')
 export class TrucksController {
-  constructor(private readonly trucksService: TrucksService) {}
+  constructor(
+    private readonly trucksService: TrucksService,
+    private readonly locationsService: LocationsService,
+  ) {}
 
   @Post()
   create(@Body() createTruckDto: CreateTruckDto) {
@@ -16,9 +20,11 @@ export class TrucksController {
     return this.trucksService.findAll();
   }
 
-  @Get(':chassi')
-  findOne(@Param('chassi') chassi: string) {
-    return this.trucksService.findOne(chassi);
+  @Get(':id')
+  async findOne(@Param('id') id: string) {
+    const truck = await this.trucksService.findOne(id);
+    const locations = await this.locationsService.findLocationsByTruckId(id);
+    return { truck, locations };
   }
 
   @Delete(':id')
