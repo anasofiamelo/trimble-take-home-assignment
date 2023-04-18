@@ -1,7 +1,9 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument } from 'mongoose';
+import * as mongoose from 'mongoose';
 
-export type TruckDocument = HydratedDocument<Trucks>;
+import { Locations } from '../../locations/schemas/location.schema';
+
+export type TruckDocument = mongoose.HydratedDocument<Trucks>;
 
 @Schema({ timestamps: true })
 export class Trucks {
@@ -13,6 +15,9 @@ export class Trucks {
 
   @Prop({})
   year: number;
+
+  @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Locations' }] })
+  locations: Locations[];
 }
 
 export const TrucksSchema = SchemaFactory.createForClass(Trucks);
