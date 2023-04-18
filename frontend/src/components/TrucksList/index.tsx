@@ -48,9 +48,7 @@ function TrucksList() {
       )}
       <Stack spacing={1}>
         {data.trucks?.map((truck: any) => (
-          <Link to={`${truck._id}`} key={truck.chassi}>
-            <TruckCard {...truck} />
-          </Link>
+          <TruckCard key={truck._id} {...truck} />
         ))}
       </Stack>
     </div>
