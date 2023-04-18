@@ -4,26 +4,38 @@ import { Model } from 'mongoose';
 
 import { CreateLocationDto } from './dto/create-location.dto';
 
-import { Locations } from './schemas/location.schema';
+import { Location } from './schemas/location.schema';
 
-import { Truck } from '../trucks/entities/truck.entity';
-import { Trucks } from '../trucks/schemas/truck.schema';
+import { Truck } from '../trucks/schemas/truck.schema';
 
 @Injectable()
 export class LocationsService {
   constructor(
-    @InjectModel(Locations.name) private locationModel: Model<Locations>,
-    @InjectModel(Trucks.name) private truckModel: Model<Truck>,
+    @InjectModel(Location.name) private locationModel: Model<Location>,
+    @InjectModel(Truck.name) private truckModel: Model<Truck>,
   ) {}
 
-  async create(createLocationDto: CreateLocationDto) {
-    const { chassi } = createLocationDto;
-
-    const truck = await this.truckModel.findOne({ chassi });
+  async create(truckId, createLocationDto: CreateLocationDto) {
+    const truck = await this.truckModel.findById(truckId);
 
     if (!truck) throw new NotFoundException('Truck not found');
 
-    await this.locationModel.create(createLocationDto);
+    await this.locationModel.create({ ...createLocationDto, truckId });
+  }
+
+  async findLocationsByTruckId(truckId: string) {
+    const locations = await this.locationModel.find({ truckId });
+
+    return locations;
+  }
+
+  async findLocationLastAdded(truckId: string) {
+    const location = await this.locationModel
+      .find({ truckId })
+      .sort({ createdAt: -1 })
+      .limit(1);
+
+    return location;
   }
 
   remove(id: number) {
