@@ -1,14 +1,15 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { ConfigModule } from '@nestjs/config';
 
 import { TrucksModule } from './trucks/trucks.module';
 import { LocationsModule } from './locations/locations.module';
 
+const MONGO_DB_URI =
+  'mongodb+srv://sofiamelod:cEGmSLRoGQwYSFpv@cluster0.4xqpzu2.mongodb.net/?retryWrites=true&w=majority';
+
 @Module({
   imports: [
-    ConfigModule.forRoot({ envFilePath: '.env', isGlobal: true }),
-    MongooseModule.forRoot(process.env.MONGO_DB_URI),
+    MongooseModule.forRoot(MONGO_DB_URI),
     TrucksModule,
     LocationsModule,
   ],
