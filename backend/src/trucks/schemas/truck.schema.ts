@@ -1,23 +1,21 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Document } from 'mongoose';
 import * as mongoose from 'mongoose';
 
-import { Locations } from '../../locations/schemas/location.schema';
-
-export type TruckDocument = mongoose.HydratedDocument<Trucks>;
-
+import { Location } from 'src/locations/schemas/location.schema';
 @Schema({ timestamps: true })
-export class Trucks {
+export class Truck extends Document {
   @Prop({ unique: true })
   chassi: string;
 
-  @Prop({})
+  @Prop({ required: true })
   model: string;
 
-  @Prop({})
+  @Prop({ required: true })
   year: number;
 
-  @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Locations' }] })
-  locations: Locations[];
+  @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Location' }] })
+  locations: Location[];
 }
 
-export const TrucksSchema = SchemaFactory.createForClass(Trucks);
+export const TruckSchema = SchemaFactory.createForClass(Truck);
