@@ -27,6 +27,18 @@ function TrucksList() {
     }
   }, [data])
 
+  async function handleDeleteTruck(_id: string, model: string) {
+    try {
+      await TruckService.delete(_id)
+      setAlert({ type: 'success', message: `${model} deleted` })
+    } catch (err: unknown) {
+      const error = err as AxiosError
+      if (!error.response) {
+        setAlert({ type: 'error', message: 'Internal server error' })
+      }
+    }
+  }
+
   return (
     <div>
       <Stack
@@ -48,7 +60,7 @@ function TrucksList() {
       )}
       <Stack spacing={1}>
         {data.trucks?.map((truck: any) => (
-          <TruckCard key={truck._id} {...truck} />
+          <TruckCard onDelete={handleDeleteTruck} key={truck._id} {...truck} />
         ))}
       </Stack>
     </div>
