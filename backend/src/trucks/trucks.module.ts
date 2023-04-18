@@ -4,13 +4,18 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { TrucksService } from './trucks.service';
 import { TrucksController } from './trucks.controller';
 
-import { TrucksSchema } from './schemas/truck.schema';
-import { Trucks } from './schemas/truck.schema';
+import { Truck, TruckSchema } from './schemas/truck.schema';
+import { Location, LocationSchema } from '../locations/schemas/location.schema';
+import { LocationsService } from 'src/locations/locations.service';
+
 @Module({
   imports: [
-    MongooseModule.forFeature([{ name: Trucks.name, schema: TrucksSchema }]),
+    MongooseModule.forFeature([
+      { name: Truck.name, schema: TruckSchema },
+      { name: Location.name, schema: LocationSchema },
+    ]),
   ],
   controllers: [TrucksController],
-  providers: [TrucksService],
+  providers: [TrucksService, LocationsService],
 })
 export class TrucksModule {}
