@@ -23,8 +23,8 @@ export class TrucksController {
   @Get(':id')
   async findOne(@Param('id') id: string) {
     const truck = await this.trucksService.findOne(id);
-    const locations = await this.locationsService.findLocationsByTruckId(id);
-    return { truck, locations };
+    const lastLocation = await this.locationsService.findLocationLastAdded(id);
+    return { truck, lastLocation };
   }
 
   @Delete(':id')
