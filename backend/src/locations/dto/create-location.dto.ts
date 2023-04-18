@@ -4,7 +4,7 @@ export class CreateLocationDto {
   @IsNotEmpty()
   @IsString()
   @Length(17)
-  chassi: string;
+  chassis: string;
 
   @IsNotEmpty()
   latitude: number;
