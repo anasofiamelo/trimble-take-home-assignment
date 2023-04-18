@@ -6,6 +6,7 @@ export interface Location {
 }
 
 export interface Truck {
+  _id: string
   chassis: string
   model: string
   year: number
