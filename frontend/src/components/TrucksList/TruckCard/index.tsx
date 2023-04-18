@@ -1,40 +1,14 @@
 import { Link } from 'react-router-dom'
-import { AxiosError } from 'axios'
-import {
-  Button,
-  Card,
-  CardActions,
-  CardContent,
-  Typography,
-  Stack,
-  Alert
-} from '@mui/material'
-
-import TruckService from '../../../services/TruckService'
-import useAlert from '../../../hooks/useAlert'
+import { Button, Card, CardActions, CardContent, Typography, Stack } from '@mui/material'
 
 function TruckCard(props: any) {
-  const { _id, model, chassis, year } = props
-
-  const { alert, setAlert, handleCloseAlert } = useAlert()
+  const { _id, model, chassis, year, onDelete } = props
 
   async function handleDeleteTruck() {
-    try {
-      await TruckService.delete(_id)
-    } catch (err: unknown) {
-      const error = err as AxiosError
-      if (!error.response) {
-        setAlert({ type: 'error', message: 'Internal server error' })
-      }
-    }
+    onDelete(_id, model)
   }
   return (
     <Card sx={{ padding: 1 }} variant="outlined">
-      {alert && (
-        <Alert onClose={handleCloseAlert} severity={alert.type}>
-          {alert.message}
-        </Alert>
-      )}
       <CardContent>
         <Stack direction="row" alignItems="center" spacing={0.5}>
           <Typography color="text.secondary">Model: </Typography>
