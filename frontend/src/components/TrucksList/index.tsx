@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { Alert, Button, Card, Stack } from '@mui/material'
+import { Alert, Button, Card, CardActions, CardContent, Stack } from '@mui/material'
 import { useLoaderData, Link } from 'react-router-dom'
 import { AxiosError } from 'axios'
 
@@ -10,6 +10,7 @@ import TruckService from '../../services/TruckService'
 import useAlert from '../../hooks/useAlert'
 
 import { Truck } from '../../interfaces/Truck'
+import TruckCard from './TruckCard'
 
 type LoaderData = {
   trucks?: Truck[]
@@ -47,11 +48,8 @@ function TrucksList() {
       )}
       <Stack spacing={1}>
         {data.trucks?.map((truck: any) => (
-          <Link to={`${truck.chassi}`} key={truck.chassi}>
-            <Card variant="outlined">
-              <p>Chassi: {truck.chassi}</p>
-              <p>Model: {truck.model}</p>
-            </Card>
+          <Link to={`${truck._id}`} key={truck.chassi}>
+            <TruckCard {...truck} />
           </Link>
         ))}
       </Stack>
