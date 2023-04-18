@@ -15,8 +15,8 @@ export class TrucksService {
   constructor(@InjectModel(Truck.name) private truckModel: Model<Truck>) {}
 
   async create(createTruckDto: CreateTruckDto) {
-    const { chassi } = createTruckDto;
-    const exists = await this.truckModel.findOne({ chassi });
+    const { chassis } = createTruckDto;
+    const exists = await this.truckModel.findOne({ chassis });
 
     if (exists) {
       throw new ConflictException('Truck already exists');
