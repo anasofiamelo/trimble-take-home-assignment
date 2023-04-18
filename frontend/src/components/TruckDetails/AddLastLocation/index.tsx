@@ -32,7 +32,7 @@ function AddLastLocation() {
     try {
       setAlert(null)
       e.preventDefault()
-      const res = await TruckService.createLocation(truckId!, formData)
+      await TruckService.createLocation(truckId!, formData)
       setAlert({ type: 'success', message: 'Last location added' })
     } catch (err: unknown) {
       setAlert({ type: 'error', message: 'Server error' })
@@ -73,6 +73,9 @@ function AddLastLocation() {
             variant="outlined"
             type="number"
             required={true}
+            inputProps={{
+              step: 0.1
+            }}
           />
 
           <TextField
@@ -82,6 +85,9 @@ function AddLastLocation() {
             variant="outlined"
             type="number"
             required={true}
+            inputProps={{
+              step: 0.01
+            }}
           />
         </div>
         <div style={{ display: 'flex', justifyContent: 'center' }}>
